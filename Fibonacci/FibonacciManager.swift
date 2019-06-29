@@ -31,8 +31,8 @@ class FibonacciManager: NSObject {
         return true
     }
     
-    func getNumber(no: Int) throws -> Int {
-        if !isNumberVaild(num: no) {
+    func getNumber(number: Int) throws -> Int {
+        if !isNumberVaild(num: number) {
             throw FibonacciError.Invaild
         }
 
@@ -41,13 +41,13 @@ class FibonacciManager: NSObject {
         results.append(1)
         results.append(1)
 
-        if no == 0 {
+        if number == 0 {
             return results[0]
-        } else if no == 1 {
+        } else if number == 1 {
             return results[1]
         }
 
-        for _ in stride(from: 2, to: no+1, by: 1) {
+        for _ in stride(from: 2, to: number+1, by: 1) {
             if results[0] > max || results[1] > max {
                 throw FibonacciError.OverMax
             }
@@ -79,7 +79,8 @@ class FibonacciManager: NSObject {
                 throw FibonacciError.OverMax
             }
             results.append(temp[0] + temp[1])
-//            results.append(cal(no: i))
+            /* Use recursive will be slower. */
+//            results.append(cal(number: i))
         }
         
         return results
@@ -94,13 +95,13 @@ class FibonacciManager: NSObject {
         return Array(results[from..<to+1])
     }
     
-    func cal(no: Int) -> Int {
-        if no == 0 {
+    func cal(number: Int) -> Int {
+        if number == 0 {
             return 0
-        } else if no == 1 {
+        } else if number == 1 {
             return 1
         }
         
-        return cal(no: no-1) + cal(no: no-2)
+        return cal(number: number-1) + cal(number: number-2)
     }
 }
